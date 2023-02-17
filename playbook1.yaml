@@ -1,0 +1,37 @@
+---
+- name: First
+  hosts: all_servers
+  remote_user: osboxes
+
+  vars_prompt:
+    - name: source
+      prompt: Enter additional path to host number 2!
+      private: false
+    - name: file
+      prompt: Enter filename!
+      private: false
+    
+
+  
+  vars:
+    path: /home/osboxes/test_ansible
+    output: /home/osboxes/project/
+  tasks:
+    - name: "copyfile no question"
+      fetch:
+        src: '{{ path }}/{{ file }}'
+        dest: '{{ output }}'
+      when: ansible_host== '{{ item }}'
+      loop:
+        - 192.168.31.54
+        - 192.168.31.70
+
+    - name: "excel"
+      ansible.builtin.script:
+        cmd: /bin/python3 excel.py "{{ file }}"
+       #excel.py
+       #args:
+       # executable: python3
+      when: ansible_host == "target2"
+      
+  

@@ -31,5 +31,7 @@ def main(path_file, name_file):
     ws.append(list_data)
     wb.save("hosts.xlsx")
     wb.close()
+    #path = os.path.join(os.path.abspath(os.path.dirname(__file__)), name_file)
+    #os.remove(path)
 
 main(path_file,name_file)

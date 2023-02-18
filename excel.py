@@ -1,6 +1,7 @@
 import openpyxl
 import os
 from sys import argv
+#import shutil
 name_file = argv[1]
 print(name_file)
 path_file = os.path.abspath(os.curdir)
@@ -18,20 +19,20 @@ def main(path_file, name_file):
         with open(path) as file:
             data = file.read()
             list_data.append(f"<id-{data}>")
-            print(data)
+            #print(data)
             if int(data)<10:
                 list_hosts.append(f"<host-0{data}>")
             else:
                 list_hosts.append(f"<host-{data}>")
     wb = openpyxl.Workbook()
-    ws = wb['Sheet']     
-    print(list_data)
-    print(list_hosts)
+    ws = wb['Sheet']  
+    #print(list_path_file)   
+    #print(list_data)
+    #print(list_hosts)
     ws.append(list_hosts)
     ws.append(list_data)
     wb.save("hosts.xlsx")
     wb.close()
-    #path = os.path.join(os.path.abspath(os.path.dirname(__file__)), name_file)
-    #os.remove(path)
-
-main(path_file,name_file)
+    
+                
+main(path_file, name_file)
